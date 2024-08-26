@@ -2,11 +2,11 @@ const mongoose = require('mongoose')
 const AutoIncrement = require('mongoose-sequence')(mongoose)
 const ticketSchema = new mongoose.Schema(
     {
-        user: {
+        user: [{
             type: mongoose.Schema.Types.ObjectId,
             required: true,
             ref: "User"
-        },
+        }],
         title: {
             type: String,
             required: true
@@ -23,15 +23,11 @@ const ticketSchema = new mongoose.Schema(
             type: Number,
             required: true
         },
-        status: {
+        statusCode: {
             type: Number,
             default: 0
         },
-        progressLog: [String],
-        active: {
-            type: Boolean,
-            default: true
-        }
+        progressLog: [String]
     },
     {
         timestamps: true
