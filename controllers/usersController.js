@@ -77,7 +77,7 @@ const deleteUser = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'User ID required.' })
     }
 
-    const ticket = await Ticket.findOne({ user: id }).lean().exec()
+    const ticket = await Ticket.findOne({ users: id }).lean().exec()
     if (ticket) {
         return res.status(400).json({message: 'User has assigned Tickets'})
     }

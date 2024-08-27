@@ -1,4 +1,5 @@
 const Ticket = require('../models/Ticket')
+const User = require('../models/User')
 const asyncHandler = require('express-async-handler')
 
 // @desc Get all tickets
@@ -9,7 +10,20 @@ const getAllTickets = asyncHandler(async (req, res) => {
     if (!tickets?.length) {
         return res.status(400).json({ message: `No tickets found.` })
     }
-    res.json(tickets)
+
+    // Spare Me, Jsut for a few days
+    const ticketsWithNames = await Promise.all(tickets.map(async ticket => {
+        const usernames = await Promise.all(ticket.users.map(async user => {
+            const userId = user.toString()
+            const userObj = await User.findById(userId).lean().exec()
+            return (userObj.username)
+        }
+    ))
+        console.log(usernames)
+        return {...ticket, usernames}      
+    }))
+
+    res.json(ticketsWithNames)
 })
 
 // { user, title, description, category, urgency, statusCode, progressLog }
@@ -18,9 +32,9 @@ const getAllTickets = asyncHandler(async (req, res) => {
 // @route POST /tickets
 // @access Private
 const createNewTicket = asyncHandler(async (req, res) => {
-    const { user, title, description, category, urgency } = req.body
+    const { users, title, description, category, urgency } = req.body
 
-    if ( !Array.isArray(user) || !user.length  || !title || !description || !category || !urgency ) {
+    if ( !Array.isArray(users) || !users.length  || !title || !description || !category || !urgency ) {
         return res.status(400).json({ message: 'All fields are required.' })
     }
     
@@ -30,7 +44,7 @@ const createNewTicket = asyncHandler(async (req, res) => {
     } */
 
     // const userObject = { username, "password": hashedPwd, roles }
-    const ticketObject = { user, title, description, category, urgency }
+    const ticketObject = { users, title, description, category, urgency }
 
     const ticket = await Ticket.create(ticketObject)
     if (ticket) {
@@ -44,7 +58,7 @@ const createNewTicket = asyncHandler(async (req, res) => {
 // @route PATCH /tickets
 // @access Private
 const updateTicket = asyncHandler(async (req, res) => {
-    const { id, user, title, description, category, urgency, statusCode, progressLog } = req.body
+    const { id, users, title, description, category, urgency, statusCode, progressLog } = req.body
     if ( !id ) {
         return res.status(400).json({ message: 'Id field is required.' })
     }
@@ -60,10 +74,10 @@ const updateTicket = asyncHandler(async (req, res) => {
     }
  */
     // FIX : don't allow for dublicate user entries
-    if (user) {
-        const usersArray  = ticket.user
-        usersArray.push(user)
-        ticket.user = usersArray
+    if (users) {
+        const usersArray  = ticket.users
+        usersArray.push(users)
+        ticket.users = usersArray
     } 
     if (title) ticket.title = title
     if (description) ticket.description = description
