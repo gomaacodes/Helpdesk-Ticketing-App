@@ -11,14 +11,23 @@ const getAllTickets = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: `No tickets found.` })
     }
 
-    // Spare Me, Jsut for a few days
+    // Spare Me, Just for a few days
     const ticketsWithNames = await Promise.all(tickets.map(async ticket => {
+        
+        // IF the Order of returned Usernames MATTERS
+        /* const usernames = []
+        for (const user of ticket.users) {
+            const userId = user.toString()
+            const userObj = await User.findById(userId).lean().exec()
+            usernames.push(userObj.username)
+        } */
+
+        // IF the Order of returned Usernames DOESN'T MATTER
         const usernames = await Promise.all(ticket.users.map(async user => {
             const userId = user.toString()
             const userObj = await User.findById(userId).lean().exec()
             return (userObj.username)
-        }
-    ))
+        }))
         console.log(usernames)
         return {...ticket, usernames}      
     }))
