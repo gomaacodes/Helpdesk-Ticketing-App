@@ -10,8 +10,8 @@
 
 :root {
   /* COLORS */
-  --BGCOLOR: #0F172A;
-  --BORDER-COLOR: #FFF;
+  --BGCOLOR: #0F172A;; /* #0F172A; */
+  --BORDER-COLOR: #FFF; /* #FFF; */
   --COLOR: #FFF;
   --ERROR: firebrick;
   --INACTIVE: lightgray;
@@ -181,52 +181,101 @@ a:focus-visible {
 }
 
 
-/* || TABLES - GENERAL */
+/* || TICKETS - GENERAL */
 
-thead,
-tbody,
-tr {
-  display: contents;
+/* .ticketlist__main {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+} */
+
+.ticketlist__main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.ticket {
+  width: 300px;
+  border: 1px solid #636981;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 8px;
+  background-color: #373e54;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.table {
-  font-size: 1rem;
+.ticket__header__left {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.ticket__title {
+  margin: 0;
+  font-size: 18px;
+  color: #f5f9ff;
+  font-weight: bold;
+}
+
+.ticket__category {
+  margin: 0;
+  font-size: 14px;
+  color: #8c91a6;
+}
+.ticket__date {
+  margin: 0;
+  font-size: 14px;
+  color: #8c91a6;
+}
+
+.ticket__divider {
+  margin: 14px 0;
+  border: none;
+  border-top: 1px solid #636981;
+}
+
+.ticket__urgency {
+  display: flex;
+  justify-content: center;
+  gap: 16%;
+  margin-bottom: 14px;
+}
+
+.ticket__urgency__circle {
+  width: 15px;
+  height: 15px;
+  background-color: #ccc;
+  border-radius: 50%;
+}
+
+.ticket__content {
+  margin-right: 8%;
+}
+
+.ticket__description {
+  min-width: 268px;
+  padding-bottom: 8px;
+}
+
+.ticket__description p {
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  color: var(--TABLE-COLOR);
-  gap: 0.1em;
+  height: 60px;
+  font-size: 14px;
+  background-color: #373e54;
+  border: 1px solid #636981;
+  border-radius: 4px;
+  padding: 8px;
+  padding-right: 1px;
 }
 
-.table__button {
-  padding: 0.25em;
-  font-size: 1.5rem;
-  color: var(--TABLE-COLOR);
+.ticket__footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #f5f9ff;
 }
 
-.table__thead {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
-
-.table__th,
-.table__cell {
-  background-color: var(--TABLE-BGCOLOR);
-  text-align: left;
-  border: 1px solid var(--TABLE-COLOR);
-  padding: 0.5em;
-}
-
-.table__cell:last-child {
-  display: grid;
-  place-content: center;
-}
-
-.table__cell--inactive {
-  background-color: var(--INACTIVE);
-}
 
 /* ||  NOTE */
 
