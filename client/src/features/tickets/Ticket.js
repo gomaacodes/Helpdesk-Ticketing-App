@@ -21,6 +21,9 @@ const Ticket = ({ ticketId }) => {
                     <h3 class="ticket__title">{ticket.title}</h3>
                     <h5 class="ticket__category">{ticket.category}</h5>
                 </div>
+                <div className='ticket__header__right'>
+                    <FontAwesomeIcon icon={faPenToSquare} />
+                </div>
             </div>
             <div className='ticket__date'>
                 {!updated ? created : updated}

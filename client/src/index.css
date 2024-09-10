@@ -17,7 +17,7 @@
   --INACTIVE: lightgray;
   --LINK-COLOR: whitesmoke;
   --LINK-HOVER: rgba(245, 245, 245, 0.9);
-  --TICKET-BGCOLOR: hsla(240, 64%, 27%, 0.65);
+  --TICKET-BGCOLOR: #373e54;
   --STATUS-COMPLETE: limegreen;
   --STATUS-OPEN: firebrick;
   --TABLE-BGCOLOR: #FFF;
@@ -38,9 +38,6 @@
 }
 
 .icon-button {
-  width: 48px;
-  height: 48px;
-  font-size: 2.5rem;
   background-color: transparent;
   border: none;
   color: var(--COLOR);
@@ -201,13 +198,23 @@ a:focus-visible {
   border-radius: 8px;
   padding: 15px;
   margin: 8px;
-  background-color: #373e54;
+  background-color: var(--TICKET-BGCOLOR);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.ticket__header {
+  display: flex;
+  justify-content: space-between;
+}
 .ticket__header__left {
   display: flex;
   flex-direction: row;
+  gap: 10px;
+}
+
+.ticket__header__right {
+  display: flex;
+  flex-direction: row-reverse;
   gap: 10px;
 }
 
