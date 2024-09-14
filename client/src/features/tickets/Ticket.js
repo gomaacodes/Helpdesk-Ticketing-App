@@ -22,7 +22,12 @@ const Ticket = ({ ticketId }) => {
                     <h5 class="ticket__category">{ticket.category}</h5>
                 </div>
                 <div className='ticket__header__right'>
-                    <FontAwesomeIcon icon={faPenToSquare} />
+                    <button
+                        className="icon-button"
+                        onClick={handleEdit}
+                    >
+                        <FontAwesomeIcon icon={faPenToSquare} />
+                    </button>
                 </div>
             </div>
             <div className='ticket__date'>

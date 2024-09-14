@@ -11,7 +11,9 @@ const Welcome = () => {
         <h1>Welcome!</h1>
 
         <p><Link to="/dash/tickets">View Tickets</Link></p>
+        <p><Link to="/dash/tickets/new">Add New Tickets</Link></p>
         <p><Link to="/dash/users">View Users</Link></p>
+        <p><Link to="/dash/users/new">Add New User</Link></p>
     </section>
   )
 

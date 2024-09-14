@@ -22,6 +22,7 @@
   --STATUS-OPEN: firebrick;
   --TABLE-BGCOLOR: #FFF;
   --TABLE-COLOR: #000;
+  --INPUT-INVALID: #F00;
 }
 
 /* || UTILITY CLASSES */
@@ -177,6 +178,52 @@ a:focus-visible {
   height: auto;
 }
 
+/* || TABLES - GENERAL */
+
+thead,
+tbody,
+tr {
+  display: contents;
+}
+
+.table {
+  font-size: 1rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  color: var(--TABLE-COLOR);
+  gap: 0.1em;
+}
+
+.table__button {
+  padding: 0.25em;
+  font-size: 1.5rem;
+  color: var(--TABLE-COLOR);
+}
+
+.table__thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.table__th,
+.table__cell {
+  background-color: var(--TABLE-BGCOLOR);
+  text-align: left;
+  border: 1px solid var(--TABLE-COLOR);
+  padding: 0.5em;
+}
+
+.table__cell:last-child {
+  display: grid;
+  place-content: center;
+}
+
+.table__cell--inactive {
+  background-color: var(--INACTIVE);
+}
+
 
 /* || TICKETS - GENERAL */
 
@@ -283,8 +330,7 @@ a:focus-visible {
   color: #f5f9ff;
 }
 
-
-/* ||  NOTE */
+/* ||  Ticket  */
 
 .ticket__created,
 .ticket__updated,
@@ -346,10 +392,9 @@ a:focus-visible {
 }
 
 .form__input--incomplete {
-  border: 1px solid red;
-  outline: 1px solid red;
+  border: 1px solid var(--INPUT-INVALID);
+  outline: 1px solid var(--INPUT-INVALID);
 }
-
 
 .form__checkbox {
   width: 24px;
