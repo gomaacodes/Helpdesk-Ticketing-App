@@ -8,9 +8,9 @@ const EditTicket = () => {
   const { id } = useParams()
 
   const ticket = useSelector(state => selectTicketById(state, id))
-  const users = useSelector(selectAllUsers)
+  const allUsers = useSelector(selectAllUsers)
 
-  const content = ticket && users ? <EditTicketForm ticket={ticket} users={users} /> : <p>Loading...</p>
+  const content = ticket && allUsers ? <EditTicketForm ticket={ticket} allUsers={allUsers} /> : <p>Loading...</p>
   return content  
 }
 

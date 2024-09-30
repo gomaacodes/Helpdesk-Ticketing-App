@@ -28,7 +28,6 @@ const getAllTickets = asyncHandler(async (req, res) => {
             const userObj = await User.findById(userId).lean().exec()
             return (userObj.username)
         }))
-        console.log(usernames)
         return {...ticket, usernames}      
     }))
 
@@ -41,9 +40,9 @@ const getAllTickets = asyncHandler(async (req, res) => {
 // @route POST /tickets
 // @access Private
 const createNewTicket = asyncHandler(async (req, res) => {
-    const { users, title, description, category, urgency } = req.body
+    const { title, category, urgency, description, statusCode } = req.body
 
-    if ( !Array.isArray(users) || !users.length  || !title || !description || !category || !urgency ) {
+    if ( !title || !description || !category || !urgency ) {
         return res.status(400).json({ message: 'All fields are required.' })
     }
     
@@ -53,7 +52,7 @@ const createNewTicket = asyncHandler(async (req, res) => {
     } */
 
     // const userObject = { username, "password": hashedPwd, roles }
-    const ticketObject = { users, title, description, category, urgency }
+    const ticketObject = { title, category, urgency, description, statusCode }
 
     const ticket = await Ticket.create(ticketObject)
     if (ticket) {
@@ -67,7 +66,7 @@ const createNewTicket = asyncHandler(async (req, res) => {
 // @route PATCH /tickets
 // @access Private
 const updateTicket = asyncHandler(async (req, res) => {
-    const { id, users, title, description, category, urgency, statusCode, progressLog } = req.body
+    const { id, title, category, urgency, description, users, progressLog, statusCode } = req.body
     if ( !id ) {
         return res.status(400).json({ message: 'Id field is required.' })
     }
@@ -77,24 +76,15 @@ const updateTicket = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'Ticket not found' })
     }
 
-    /* const dublicate = await Ticket.findOne({username}).lean().exec()
-    if (dublicate && dublicate?._id.toString() !== id) {
-        return res.status(409).json({ message: 'Username already exists' })
-    }
- */
-    // FIX : don't allow for dublicate user entries
-    if (users) {
-        const usersArray  = ticket.users
-        usersArray.push(users)
-        ticket.users = usersArray
-    } 
+    if (users) ticket.users = users
     if (title) ticket.title = title
     if (description) ticket.description = description
     if (category) ticket.category = category
     if (urgency) ticket.urgency = urgency
     if (statusCode) ticket.statusCode = statusCode
-    if (progressLog) ticket.progressLog.concat(progressLog)
+    if (progressLog) ticket.progressLog = progressLog
     
+    console.log(ticket)
 
     const updatedTicket = await ticket.save()
 
