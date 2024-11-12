@@ -38,7 +38,7 @@ const getAllTickets = asyncHandler(async (req, res) => {
 
 // @desc Create new ticket
 // @route POST /tickets
-// @access Private
+// @access Public
 const createNewTicket = asyncHandler(async (req, res) => {
     const { title, category, urgency, description, statusCode } = req.body
 
@@ -83,9 +83,7 @@ const updateTicket = asyncHandler(async (req, res) => {
     if (urgency) ticket.urgency = urgency
     if (statusCode) ticket.statusCode = statusCode
     if (progressLog) ticket.progressLog = progressLog
-    
-    console.log(ticket)
-
+ 
     const updatedTicket = await ticket.save()
 
     res.json({message: `${updatedTicket.ticket} updated`})

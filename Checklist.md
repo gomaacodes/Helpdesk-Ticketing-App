@@ -3,8 +3,8 @@
 1. [ ] Implement a form page for ticket submission.
 2. [ ] Integrate an employee login & logout feature into the TechKits app.
 3. [ ] Define user roles: Admins, Managers, and Employees.
-4. [ ] Assign tickets to employees based on category and urgency.
-5. [ ] Allow any employee to take on open ticket, regardless of the initial assignment.
+4. [ ] Assign tickets to employees based on category and urgency. [Feature abandoned due to time constraints]
+5. [ ] Allow any employee to take on open ticket, regardless of the current assignment. [initial => current]
 6. [ ] Ensure tickets include a unique ID, title, description, category, urgency level, progress log, status, and timestamps for creation and updates.
 7. [ ] Enable tickets to have statuses such as Open (not started, in progress, requires additional assistance) or Closed (completed).
 8. [ ] Allow employees to only view and edit tickets.

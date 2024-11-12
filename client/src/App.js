@@ -7,11 +7,12 @@ import DashLayout from "./components/DashLayout"
 import Welcome from "./features/auth/Welcome"
 import TicketsList from "./features/tickets/TicketsList"
 import EditTicket from "./features/tickets/EditTicket"
-import NewTicket from "./features/tickets/NewTicket"
+import NewTicketForm from "./features/tickets/NewTicketForm"
 import UsersList from "./features/users/UsersList"
 import EditUser from "./features/users/EditUser"
 import NewUserForm from "./features/users/NewUserForm"
 import Prefetch from "./features/auth/Prefetch"
+import PersistLogin from "./features/auth/PersistLogin"
 
 
 function App() {
@@ -21,20 +22,23 @@ function App() {
         <Route index element={<Home />} />
         <Route path="form" element={<TicketForm />} />
         <Route path="login" element={<Login />} />
+        
         <Route element={<Prefetch />}>
-          <Route path="dash" element={<DashLayout />}>
-            <Route index element={<Welcome />} />
+          <Route element={<PersistLogin />}>
+            <Route path="dash" element={<DashLayout />}>
+              <Route index element={<Welcome />} />
 
-            <Route path="tickets">
-              <Route index element={<TicketsList />}/>
-              <Route path=":id" element={<EditTicket />}/>
-              <Route path="new" element={<NewTicket />}/>
-            </Route>
-            
-            <Route path="users">
-              <Route index element={<UsersList />}/>
-              <Route path=":id" element={<EditUser />}/>
-              <Route path="new" element={<NewUserForm />}/>
+              <Route path="tickets">
+                <Route index element={<TicketsList />}/>
+                <Route path=":id" element={<EditTicket />}/>
+                <Route path="new" element={<NewTicketForm />}/>
+              </Route>
+              
+              <Route path="users">
+                <Route index element={<UsersList />}/>
+                <Route path=":id" element={<EditUser />}/>
+                <Route path="new" element={<NewUserForm />}/>
+              </Route>
             </Route>
           </Route>
         </Route>
