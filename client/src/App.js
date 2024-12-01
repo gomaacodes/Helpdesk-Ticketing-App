@@ -23,8 +23,8 @@ function App() {
         <Route path="form" element={<TicketForm />} />
         <Route path="login" element={<Login />} />
         
-        <Route element={<Prefetch />}>
-          <Route element={<PersistLogin />}>
+        <Route element={<PersistLogin />}>
+          <Route element={<Prefetch />}>
             <Route path="dash" element={<DashLayout />}>
               <Route index element={<Welcome />} />
 
